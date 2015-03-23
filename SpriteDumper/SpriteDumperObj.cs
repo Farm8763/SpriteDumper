@@ -19,7 +19,7 @@ namespace SpriteDumper {
                 "\r\n\r\n {SPRITES} \r\n" +
                 "About this page\r\n" +
                 "---------------\r\n" +
-                "This wiki page was created in game with the SpriteDumper mod.\r\n" +
+                "This wiki page was created in game with the `SpriteDumper mod <https://github.com/worstboy32/SpriteDumper>`__ .\r\n" +
                 "To modify the text in this document please create a PR on the mod on github.\r\n" +
                 "If there are sprites missing you can run the mod and create a PR on the docs repo with the new generated file.\r\n" +
                 "\r\n" +
