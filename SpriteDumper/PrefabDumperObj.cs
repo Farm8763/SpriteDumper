@@ -12,8 +12,9 @@ namespace SpriteDumper {
                 "==========\r\n" +
                 "Prefab {TYPE}\r\n" +
                 "==========\r\n" +
-                "Here you can find a list of prefabricated roads/buildings/vehicles.\r\n" + 
-                "You can use these to get the VehicleInfo/BuildingInfo/NetInfo you want to create\r\n" +
+                "Here you can find a list of prefabricated {TYPE}.\r\n" +
+                "You can use these to get the index of the {TYPE} you want to create.\r\n" +
+                "To get the {TYPE}, do: {TYPE} my{TYPE} = PrefabCollection<{TYPE}>.GetPrefab(index)\r\n" +
                 "\r\n\r\n {PREFABS} \r\n" +
                 "About this page\r\n" +
                 "---------------\r\n" +
@@ -34,10 +35,7 @@ namespace SpriteDumper {
         }
 
         private void Dump() {
-            Utils.Log("Creating wiki page...");
-            if (Utils.CreateDir(prefabPath)) {
-                Utils.Log("Directory for prefab created at: '" + prefabPath + "'");
-            }
+            Utils.Log("Creating wiki pages...");
 
             string prefabStr = "";
             int count = PrefabCollection<VehicleInfo>.LoadedCount();
@@ -51,6 +49,7 @@ namespace SpriteDumper {
             System.IO.StreamWriter file = new System.IO.StreamWriter("PrefabDumper\\" + "VehiclePrefabs.rst");
             file.WriteLine(wikiPage.Replace("{PREFABS}", prefabStr));
             file.Close();
+            Utils.Log("Dumped " + count);
             
             prefabStr = "";
             count = PrefabCollection<BuildingInfo>.LoadedCount();
@@ -61,24 +60,25 @@ namespace SpriteDumper {
             }
             wikiPage = wikiTemplate;
             wikiPage = wikiPage.Replace("{TYPE}", "BuildingInfo");
-            System.IO.StreamWriter file = new System.IO.StreamWriter("PrefabDumper\\" + "BuildingPrefabs.rst");
+            file = new System.IO.StreamWriter("PrefabDumper\\" + "BuildingPrefabs.rst");
             file.WriteLine(wikiPage.Replace("{PREFABS}", prefabStr));
             file.Close();
+            Utils.Log("Dumped " + count);
             
             prefabStr = "";
-            count = PrefabCollection<NetinfoInfo>.LoadedCount();
+            count = PrefabCollection<NetInfo>.LoadedCount();
             for (uint x = 0; x < count; x += 1)
             {
-                prefabStr += "**" + "Name:" + PrefabCollection<NetinfoInfo>.GetPrefab(x).name + ", Index: " + x + "**\r\n\r\n";
+                prefabStr += "**" + "Name:" + PrefabCollection<NetInfo>.GetPrefab(x).name + ", Index: " + x + "**\r\n\r\n";
 
             }
             wikiPage = wikiTemplate;
-            wikiPage = wikiPage.Replace("{TYPE}", "NetInfo (Roads)");
-            System.IO.StreamWriter file = new System.IO.StreamWriter("PrefabDumper\\" + "NetPrefabs.rst");
+            wikiPage = wikiPage.Replace("{TYPE}", "NetInfo");
+            file = new System.IO.StreamWriter("PrefabDumper\\" + "NetPrefabs.rst");
             file.WriteLine(wikiPage.Replace("{PREFABS}", prefabStr));
             file.Close();
-            
-            Utils.Log("Dumped " + count + " sprites to '" + spritePath + "'");
+
+            Utils.Log("Dumped " + count);
         }
 
     }
