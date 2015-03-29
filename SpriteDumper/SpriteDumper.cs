@@ -23,6 +23,7 @@ namespace SpriteDumper {
             if (gameObj == null) {
                 gameObj = new GameObject("SpriteDumper");
                 gameObj.AddComponent<SpriteDumperObj>();
+                gameObj.AddComponent<PrefabDumperObj>();
             }
             Utils.Log("Loaded");
         }
