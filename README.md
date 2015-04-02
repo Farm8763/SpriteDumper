@@ -9,3 +9,4 @@ You can then just drag and drop the sprites/wiki pages in your local repo of the
 If you want to change the content of the sprites pages please create a PR for this mod and don't edit the pages manually.
 All the text can be found in the ``SpriteDumperObj.cs`` class.
 
+Also generates a class containing all buildings/roads/vehicles.
